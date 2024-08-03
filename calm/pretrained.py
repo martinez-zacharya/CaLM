@@ -85,9 +85,9 @@ class CaLM:
         else:
             return repr_
 
-    def embed_sequences(self, sequences: List[Union[str, CodonSequence]]) -> torch.Tensor:
+    def embed_sequences(self, sequences: List[Union[str, CodonSequence]], average=True) -> torch.Tensor:
         """Embeds a set of sequences using CaLM."""
-        return torch.cat([self.embed_sequence(seq, average=True) for seq in sequences], dim=0)
+        return [self.embed_sequence(seq, average=average) for seq in sequences]
 
     def tokenize(self, seq: CodonSequence) -> torch.Tensor:
         assert isinstance(seq, CodonSequence), 'seq must be CodonSequence'
